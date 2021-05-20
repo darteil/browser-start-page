@@ -1,0 +1,55 @@
+body {
+  font-family: "Consolas";
+  color: #282828;
+}
+
+.container {
+  margin: 20px 0 0 20px;
+}
+
+.folders {
+  display: flex;
+}
+
+.folders > div {
+  padding: 10px;
+  border: 1px solid #282828;
+  margin-right: 5px;
+}
+
+.folders > div:hover {
+  border-color: #d79921;
+  color: #d79921;
+  cursor: pointer;
+}
+
+.folders > .active {
+  border-color: #076678;
+  background-color: #076678;
+  color: white;
+}
+
+.folders > .active:hover {
+  color: #fbf1c7;
+}
+
+.bookmarks {
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+.bookmarks ul li {
+  padding-bottom: 5px;
+}
+
+.bookmarks ul li a {
+  display: block;
+  text-decoration: none;
+  color: #282828;
+}
+
+.bookmarks ul li a:hover {
+  color: #d79921;
+  cursor: pointer;
+}
+
