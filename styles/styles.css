@@ -1,10 +1,19 @@
+#root {
+  padding: 20px 20px 0 20px;
+}
+
+body, html, #root {
+  height: 100vh;
+  overflow: hidden;
+}
+
 body {
-  font-family: "Consolas";
   color: #282828;
 }
 
 .container {
-  margin: 20px 0 0 20px;
+  height: 100vh;
+  position: relative;
 }
 
 .folders {
@@ -35,7 +44,6 @@ body {
 
 .bookmarks {
   margin-top: 15px;
-  font-size: 18px;
 }
 
 .bookmarks ul li {
@@ -43,7 +51,6 @@ body {
 }
 
 .bookmarks ul li a {
-  display: block;
   text-decoration: none;
   color: #282828;
 }
@@ -53,3 +60,7 @@ body {
   cursor: pointer;
 }
 
+.font-settings {
+  position: absolute;
+  bottom: 36px;
+}
