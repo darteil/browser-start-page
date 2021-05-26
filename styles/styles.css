@@ -1,7 +1,3 @@
-#root {
-  padding: 20px 20px 0 20px;
-}
-
 body, html, #root {
   height: 100vh;
   overflow: hidden;
@@ -13,6 +9,7 @@ body {
 
 .container {
   height: 100vh;
+  padding: 20px 20px 0 20px;
   position: relative;
 }
 
@@ -21,7 +18,7 @@ body {
 }
 
 .folders > div {
-  padding: 10px 10px 8px 10px;
+  padding: 10px;
   border: 1px solid #282828;
   margin-right: 5px;
 }
@@ -32,13 +29,13 @@ body {
   cursor: pointer;
 }
 
-.folders > .active {
+.folders .active {
   border-color: #076678;
   background-color: #076678;
   color: white;
 }
 
-.folders > .active:hover {
+.folders .active:hover {
   color: #fbf1c7;
 }
 
@@ -47,7 +44,7 @@ body {
 }
 
 .bookmarks ul li {
-  padding-bottom: 5px;
+  padding-bottom: 7px;
 }
 
 .bookmarks ul li a {
@@ -63,4 +60,74 @@ body {
 .font-settings {
   position: absolute;
   bottom: 36px;
+}
+
+.home-switch {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  bottom: 80px;
+  opacity: 0.3;
+  cursor: pointer;
+}
+
+.home-switch:hover {
+  opacity: 1;
+}
+
+/* home theme */
+
+.container.home {
+  background-color: #e4ddc9;
+  color: #714e24;
+  background-image: url(/assets/images/holo.png);
+  background-position: right bottom;
+  background-repeat: no-repeat;
+}
+
+.home .folders > div {
+  background-color: #f0ece1;
+  border-color: #cec19d;
+}
+
+.home .folders > div:hover {
+  background-color: #eee2c8;
+  color: #714e24;
+}
+
+.home .folders .active {
+  background-color: #675a4d;
+  color: #e9dcc0;
+} 
+
+.home .bookmarks {
+  color: #65584b;
+}
+
+.home .bookmarks ul li a {
+  padding: 3px;
+  text-decoration: none;
+  color: #65584b;
+}
+
+.home .bookmarks ul li a:hover {
+  cursor: pointer;
+  background-color: #675a4d;
+  color: #e9dcc0;
+}
+
+.home .font-settings button {
+  border: none;
+  outline: none;
+  padding: 5px;
+  background-color: #f0ece1;
+}
+
+.home .font-settings button:hover {
+  background-color: #eee2c8;
+  color: #714e24;
+}
+
+.home .home-switch {
+  opacity: 1;
 }

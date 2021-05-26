@@ -75,6 +75,9 @@ const App = () => {
   const [folders, setFolders] = useState([]);
   const [activeFolder, setActiveFolder] = useState(0);
 
+  const [isHome, setIsHome] = useState(
+    JSON.parse(localStorage.getItem("home_theme")) || false
+  );
   const [font, setFont] = useState(
     localStorage.getItem("current_font") || "Consolas"
   );
@@ -126,9 +129,14 @@ const App = () => {
     localStorage.setItem("current_font_size", size);
   };
 
+  const toggleHomeTheme = () => {
+    setIsHome(!isHome);
+    localStorage.setItem("home_theme", !isHome);
+  };
+
   return html`
     <div
-      class="container"
+      class="container ${isHome ? "home" : ""}"
       style="font-size: ${fontSize}px; font-family: ${font};"
     >
       <div class="folders">
@@ -141,7 +149,7 @@ const App = () => {
                 getBookmarks(folder.id);
               }}
             >
-              ${folder.title}
+              <p>${folder.title}</p>
             </div>`
         )}
       </div>
@@ -159,6 +167,7 @@ const App = () => {
         setFont=${setFontEvent}
         setSize=${setFontSizeEvent}
       />
+      <div class="home-switch" onClick=${() => toggleHomeTheme()}>🏡</div>
     </div>
   `;
 };
