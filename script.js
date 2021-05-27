@@ -90,10 +90,12 @@ const App = () => {
       const tempFolders = [];
 
       for (let i = 0; i < bookmarksTree[0].children.length; i++) {
-        tempFolders.push({
-          id: bookmarksTree[0].children[i].id,
-          title: bookmarksTree[0].children[i].title,
-        });
+        if (bookmarksTree[0].children[i].children) {
+          tempFolders.push({
+            id: bookmarksTree[0].children[i].id,
+            title: bookmarksTree[0].children[i].title,
+          });
+        }
       }
 
       setFolders(tempFolders);
