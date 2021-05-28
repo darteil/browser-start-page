@@ -7,6 +7,16 @@ Google chrome расширение.
 > внутрь других папок, поэтому оставил как есть. 
 > Имейте это ввиду если вдруг захотите воспользоваться этим расширением.
 
-![](./media/screen.png)
+Home theme:
+![](./media/screen2.png)
 
+Work theme:
+![](./media/screen1.png)
+
+### Using libraries
+
+[preact](https://github.com/preactjs/preact),
+[htm](https://github.com/developit/htm)
+
+### License
 MIT License, Copyright (c) 2021 Romanov Yuri
