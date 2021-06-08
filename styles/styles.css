@@ -15,12 +15,13 @@ body {
 
 .folders {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .folders > div {
   padding: 10px;
   border: 1px solid #282828;
-  margin-right: 5px;
+  margin: 5px;
 }
 
 .folders > div:hover {
@@ -42,6 +43,7 @@ body {
 
 .bookmarks {
   margin-top: 15px;
+  margin-left: 5px;
 }
 
 .bookmarks ul li {
@@ -52,6 +54,7 @@ body {
   padding: 3px;
   text-decoration: none;
   color: #282828;
+  user-select: none;
 }
 
 .bookmarks ul li a:hover {
@@ -117,6 +120,7 @@ body {
 .home .bookmarks ul li a {
   text-decoration: none;
   color: #65584b;
+  user-select: none;
 }
 
 .home .bookmarks ul li a:hover {
