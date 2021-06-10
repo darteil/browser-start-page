@@ -21,7 +21,7 @@ body {
 .folders > div {
   padding: 10px;
   border: 1px solid #282828;
-  margin: 5px;
+  margin: 5px 0 5px 5px;
 }
 
 .folders > div:hover {
