@@ -27,6 +27,34 @@ const FONT_SIZES = [
   "32",
 ];
 
+const createBookmarksTree = (chromeBookmarksTree) => {
+  if (!chromeBookmarksTree) return [];
+
+  const bookmarks = [];
+
+  for (let i = 0; i < chromeBookmarksTree.length; i++) {
+    if (chromeBookmarksTree[i].url) {
+      bookmarks.push({
+        id: chromeBookmarksTree[i].id,
+        parentId: chromeBookmarksTree[i].parentId,
+        type: "bookmark",
+        title: chromeBookmarksTree[i].title,
+        url: chromeBookmarksTree[i].url,
+      });
+    } else {
+      bookmarks.push({
+        id: chromeBookmarksTree[i].id,
+        parentId: chromeBookmarksTree[i].parentId,
+        type: "folder",
+        title: chromeBookmarksTree[i].title,
+        bookmarks: createBookmarksTree(chromeBookmarksTree[i].children),
+      });
+    }
+  }
+
+  return bookmarks;
+};
+
 const FontSettings = (props) => {
   const [fontList, setFontList] = useState([]);
   const [show, setShow] = useState(false);
@@ -74,6 +102,8 @@ const App = () => {
   const [bookmarks, setBookmarks] = useState([]);
   const [folders, setFolders] = useState([]);
   const [activeFolder, setActiveFolder] = useState(0);
+  const [showGoUp, setShowGoUp] = useState(false);
+  const [currentParentId, setCurrentParentId] = useState("0");
 
   const [isHome, setIsHome] = useState(
     JSON.parse(localStorage.getItem("home_theme")) || false
@@ -86,16 +116,27 @@ const App = () => {
   );
 
   useEffect(() => {
-    chrome.bookmarks.getSubTree("1", (bookmarksTree) => {
+    chrome.bookmarks.getSubTree("1", (chromeBookmarks) => {
+      const bookmarksTree = createBookmarksTree(chromeBookmarks);
       const tempFolders = [];
 
-      for (let i = 0; i < bookmarksTree[0].children.length; i++) {
-        if (bookmarksTree[0].children[i].children) {
-          tempFolders.push({
-            id: bookmarksTree[0].children[i].id,
-            title: bookmarksTree[0].children[i].title,
-          });
+      let mainBarHasBookmarks = false;
+
+      for (let i = 0; i < bookmarksTree[0].bookmarks.length; i++) {
+        if (bookmarksTree[0].bookmarks[i].type === "bookmark") {
+          mainBarHasBookmarks = true;
         }
+        if (bookmarksTree[0].bookmarks[i].type === "folder") {
+          tempFolders.push(bookmarksTree[0].bookmarks[i]);
+        }
+      }
+
+      if (mainBarHasBookmarks) {
+        tempFolders.unshift({
+          id: bookmarksTree[0].id,
+          type: "bookmark bar",
+          title: bookmarksTree[0].title,
+        });
       }
 
       setFolders(tempFolders);
@@ -103,21 +144,44 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (folders.length > 0) getBookmarks(folders[0].id);
+    if (folders.length > 0) {
+      getBookmarks(folders[0].id);
+      setActiveFolder(folders[0].id);
+    }
   }, [folders]);
 
-  const getBookmarks = (id) => {
-    chrome.bookmarks.getSubTree(id, (bookmarksTree) => {
-      const tempBookmarks = [];
+  useEffect(() => {
+    chrome.bookmarks.get(currentParentId, (bookmarks) => {
+      if (bookmarks[0].parentId === "1" || bookmarks[0].parentId === "0") {
+        setShowGoUp(false);
+      } else {
+        setShowGoUp(true);
+      }
+    });
+  }, [currentParentId]);
 
-      for (let i = 0; i < bookmarksTree[0].children.length; i++) {
-        tempBookmarks.push({
-          title: bookmarksTree[0].children[i].title,
-          url: bookmarksTree[0].children[i].url,
-        });
+  const getBookmarks = (id) => {
+    chrome.bookmarks.getSubTree(id, (chromeBookmarks) => {
+      const tempBookmarks = [];
+      const bookmarksTree = createBookmarksTree(chromeBookmarks);
+
+      for (let i = 0; i < bookmarksTree[0].bookmarks.length; i++) {
+        if (bookmarksTree[0].bookmarks[i].type === "bookmark") {
+          tempBookmarks.push(bookmarksTree[0].bookmarks[i]);
+        } else {
+          if (bookmarksTree[0].id !== "1") {
+            tempBookmarks.push(bookmarksTree[0].bookmarks[i]);
+          }
+        }
       }
       setBookmarks(tempBookmarks);
-      setActiveFolder(id);
+      setCurrentParentId(tempBookmarks[0].parentId);
+    });
+  };
+
+  const goUp = () => {
+    chrome.bookmarks.getSubTree(currentParentId, (chromeBookmarks) => {
+      getBookmarks(chromeBookmarks[0].parentId);
     });
   };
 
@@ -149,6 +213,7 @@ const App = () => {
               class=${folder.id === activeFolder ? "active" : ""}
               onClick=${() => {
                 getBookmarks(folder.id);
+                setActiveFolder(folder.id);
               }}
             >
               <p>${folder.title}</p>
@@ -157,10 +222,29 @@ const App = () => {
       </div>
       <div class="bookmarks">
         <ul>
-          ${bookmarks.map(
-            (bookmark) =>
-              html`<li><a href=${bookmark.url}>${bookmark.title}</a></li>`
-          )}
+          ${showGoUp &&
+          html`<li
+            onClick=${() => {
+              goUp();
+            }}
+          >
+            <a>⮤ ...</a>
+          </li>`}
+          ${bookmarks.map((node) => {
+            if (node.type === "bookmark") {
+              return html`<li>
+                <a href=${node.url}>${node.title}</a>
+              </li>`;
+            }
+            return html`<li
+              class="folder"
+              onClick=${() => {
+                getBookmarks(node.id);
+              }}
+            >
+              <a>[${node.title}]</a>
+            </li>`;
+          })}
         </ul>
       </div>
       <${FontSettings}

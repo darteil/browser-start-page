@@ -25,8 +25,8 @@ body {
 }
 
 .folders > div:hover {
-  border-color: #d79921;
-  color: #d79921;
+  border-color: #d65d0e;
+  color: #d65d0e;
   cursor: pointer;
 }
 
@@ -50,6 +50,16 @@ body {
   padding-bottom: 7px;
 }
 
+.bookmarks ul li.folder a {
+  color: #d65d0e;
+  cursor: pointer;
+}
+
+.bookmarks ul li.folder a:hover {
+  background-color: #076678;
+  color: white;
+}
+
 .bookmarks ul li a {
   padding: 3px;
   text-decoration: none;
@@ -58,7 +68,6 @@ body {
 }
 
 .bookmarks ul li a:hover {
-  color: #d79921;
   cursor: pointer;
   background-color: #076678;
   color: white;
