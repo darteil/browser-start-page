@@ -1,17 +1,15 @@
-## Простая стартовая страница с закладками
+## Simple start page with bookmarks
 
-Google chrome расширение.
+Google chrome extension.
 
-> Note: Делалось для личного пользования. Многие недочеты были намеренно оставлены неисправленными.
-> Например: не учитываются вложенные папки на панели закладок, т.к. я никогда не добавляю дополнительные папки 
-> внутрь других папок, поэтому оставил как есть. 
-> Имейте это ввиду если вдруг захотите воспользоваться этим расширением.
+Work theme:
+![](./media/screen1.png)
 
 Home theme:
 ![](./media/screen2.png)
 
-Work theme:
-![](./media/screen1.png)
+Bookmarks structure:
+![](./media/screen3.png)
 
 ### Using libraries
 
