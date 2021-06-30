@@ -134,6 +134,7 @@ const App = () => {
       if (mainBarHasBookmarks) {
         tempFolders.unshift({
           id: bookmarksTree[0].id,
+          parentId: bookmarksTree[0].parentId,
           type: "bookmark bar",
           title: bookmarksTree[0].title,
         });
