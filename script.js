@@ -145,22 +145,20 @@ const App = () => {
 
   useEffect(() => {
     if (folders.length > 0) {
-      getBookmarks(folders[0].id);
+      getBookmarks(folders[0].id, folders[0].parentId);
       setActiveFolder(folders[0].id);
     }
   }, [folders]);
 
   useEffect(() => {
-    chrome.bookmarks.get(currentParentId, (bookmarks) => {
-      if (bookmarks[0].parentId === "1" || bookmarks[0].parentId === "0") {
-        setShowGoUp(false);
-      } else {
-        setShowGoUp(true);
-      }
-    });
+    if (currentParentId === "1" || currentParentId === "0") {
+      setShowGoUp(false);
+    } else {
+      setShowGoUp(true);
+    }
   }, [currentParentId]);
 
-  const getBookmarks = (id) => {
+  const getBookmarks = (id, parentId) => {
     chrome.bookmarks.getSubTree(id, (chromeBookmarks) => {
       const tempBookmarks = [];
       const bookmarksTree = createBookmarksTree(chromeBookmarks);
@@ -175,13 +173,13 @@ const App = () => {
         }
       }
       setBookmarks(tempBookmarks);
-      setCurrentParentId(tempBookmarks[0].parentId);
+      setCurrentParentId(parentId);
     });
   };
 
   const goUp = () => {
     chrome.bookmarks.getSubTree(currentParentId, (chromeBookmarks) => {
-      getBookmarks(chromeBookmarks[0].parentId);
+      getBookmarks(currentParentId, chromeBookmarks[0].parentId);
     });
   };
 
@@ -212,7 +210,7 @@ const App = () => {
               key=${folder.id}
               class=${folder.id === activeFolder ? "active" : ""}
               onClick=${() => {
-                getBookmarks(folder.id);
+                getBookmarks(folder.id, folder.parentId);
                 setActiveFolder(folder.id);
               }}
             >
@@ -239,7 +237,7 @@ const App = () => {
             return html`<li
               class="folder"
               onClick=${() => {
-                getBookmarks(node.id);
+                getBookmarks(node.id, node.parentId);
               }}
             >
               <a>[${node.title}]</a>
