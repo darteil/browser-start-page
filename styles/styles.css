@@ -78,6 +78,23 @@ body {
   bottom: 36px;
 }
 
+.font-settings button {
+  background-color: #076678;
+  color: white;
+  outline: none;
+  border: none;
+  padding: 5px;
+  margin-left: 2px;
+  cursor: pointer;
+}
+
+.font-settings select {
+  padding: 2px;
+  margin-right: 2px;
+  border-radius: 0;
+  outline: none;
+}
+
 .home-switch {
   width: 10px;
   height: 10px;
@@ -138,15 +155,17 @@ body {
 }
 
 .home .font-settings button {
-  border: none;
-  outline: none;
-  padding: 5px;
+  color: #65584b;
   background-color: #f0ece1;
 }
 
 .home .font-settings button:hover {
   background-color: #eee2c8;
   color: #714e24;
+}
+
+.home .font-settings select {
+  background-color: #f0ece1;
 }
 
 .home .home-switch {

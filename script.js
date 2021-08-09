@@ -93,6 +93,7 @@ const FontSettings = (props) => {
               </option>`
           )}
         </select>
+        <button onClick=${() => setShow(false)}>close</button>
       `}
     </div>
   `;
