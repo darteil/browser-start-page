@@ -233,7 +233,10 @@ const App = () => {
           ${bookmarks.map((node) => {
             if (node.type === "bookmark") {
               return html`<li>
-                <a href=${node.url}>${node.title}</a>
+                <div>
+                  <img src=${`chrome://favicon/${node.url}`}/>
+                  <a href=${node.url}>${node.title}</a>
+                </div>
               </li>`;
             }
             return html`<li
@@ -242,7 +245,10 @@ const App = () => {
                 getBookmarks(node.id, node.parentId);
               }}
             >
-              <a>[${node.title}]</a>
+              <div>
+                <img src="./assets/images/folder.ico" />
+                <a>${node.title}</a>
+              </div>
             </li>`;
           })}
         </ul>

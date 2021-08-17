@@ -50,6 +50,17 @@ body {
   padding-bottom: 7px;
 }
 
+.bookmarks ul li > div, .bookmarks ul li.folder > div {
+  display: flex;
+  align-items: center;
+}
+
+.bookmarks ul li img {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
 .bookmarks ul li.folder a {
   color: #d65d0e;
   cursor: pointer;

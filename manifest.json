@@ -6,7 +6,8 @@
   "permissions": [
     "tabs",
     "bookmarks",
-    "fontSettings"
+    "fontSettings",
+    "chrome://favicon/"
   ],
   "chrome_url_overrides": {
     "newtab": "start.html"
