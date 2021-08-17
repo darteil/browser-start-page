@@ -53,6 +53,7 @@ body {
 .bookmarks ul li > div, .bookmarks ul li.folder > div {
   display: flex;
   align-items: center;
+  height: 16px;
 }
 
 .bookmarks ul li img {
