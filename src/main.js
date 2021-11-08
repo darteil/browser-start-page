@@ -1,103 +1,13 @@
+import FontSettings from "./FontSettings.js";
+import Folders from "./Folders.js";
+import Bookmarks from "./Bookmarks.js"
+import { createBookmarksTree } from "./utils.js";
+
 const { h, render } = preact;
 const { useState, useEffect } = preactHooks;
 const html = htm.bind(h);
 
 /** @jsx h */
-
-const FONT_SIZES = [
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "11",
-  "12",
-  "13",
-  "14",
-  "15",
-  "16",
-  "17",
-  "18",
-  "19",
-  "20",
-  "22",
-  "24",
-  "26",
-  "28",
-  "32",
-];
-
-const createBookmarksTree = (chromeBookmarksTree) => {
-  if (!chromeBookmarksTree) return [];
-
-  const bookmarks = [];
-
-  for (let i = 0; i < chromeBookmarksTree.length; i++) {
-    if (chromeBookmarksTree[i].url) {
-      bookmarks.push({
-        id: chromeBookmarksTree[i].id,
-        parentId: chromeBookmarksTree[i].parentId,
-        type: "bookmark",
-        title: chromeBookmarksTree[i].title,
-        url: chromeBookmarksTree[i].url,
-      });
-    } else {
-      bookmarks.push({
-        id: chromeBookmarksTree[i].id,
-        parentId: chromeBookmarksTree[i].parentId,
-        type: "folder",
-        title: chromeBookmarksTree[i].title,
-        bookmarks: createBookmarksTree(chromeBookmarksTree[i].children),
-      });
-    }
-  }
-
-  return bookmarks;
-};
-
-const FontSettings = (props) => {
-  const [fontList, setFontList] = useState([]);
-  const [show, setShow] = useState(false);
-
-  useState(() => {
-    chrome.fontSettings.getFontList((list) => {
-      setFontList(list);
-    });
-  }, []);
-
-  return html`
-    <div class="font-settings">
-      ${!show &&
-      html`<button onClick=${() => setShow(true)}>Font settings</botton>`}
-      ${show &&
-      html`
-        <select
-          value=${props.currentFont}
-          onChange=${(event) => props.setFont(event.target.value)}
-        >
-          ${fontList.map(
-            (font) =>
-              html`<option key=${font.fontId} value=${font.displayName}>
-                ${font.displayName}
-              </option>`
-          )}
-        </select>
-        <select
-          value=${props.currentFontSize}
-          onChange=${(event) => props.setSize(event.target.value)}
-        >
-          ${FONT_SIZES.map(
-            (fontSize) =>
-              html`<option key=${fontSize} value=${fontSize}>
-                ${fontSize}
-              </option>`
-          )}
-        </select>
-        <button onClick=${() => setShow(false)}>close</button>
-      `}
-    </div>
-  `;
-};
 
 const App = () => {
   const [bookmarks, setBookmarks] = useState([]);
@@ -205,54 +115,18 @@ const App = () => {
       class="container ${isHome ? "home" : ""}"
       style="font-size: ${fontSize}px; font-family: ${font};"
     >
-      <div class="folders">
-        ${folders.map(
-          (folder) =>
-            html`<div
-              key=${folder.id}
-              class=${folder.id === activeFolder ? "active" : ""}
-              onClick=${() => {
-                getBookmarks(folder.id, folder.parentId);
-                setActiveFolder(folder.id);
-              }}
-            >
-              <p>${folder.title}</p>
-            </div>`
-        )}
-      </div>
-      <div class="bookmarks">
-        <ul>
-          ${showGoUp &&
-          html`<li
-            onClick=${() => {
-              goUp();
-            }}
-          >
-            <a>⮤ ...</a>
-          </li>`}
-          ${bookmarks.map((node) => {
-            if (node.type === "bookmark") {
-              return html`<li>
-                <div>
-                  <img src=${`chrome://favicon/${node.url}`}/>
-                  <a href=${node.url}>${node.title}</a>
-                </div>
-              </li>`;
-            }
-            return html`<li
-              class="folder"
-              onClick=${() => {
-                getBookmarks(node.id, node.parentId);
-              }}
-            >
-              <div>
-                <img src="./assets/images/folder.ico" />
-                <a>${node.title}</a>
-              </div>
-            </li>`;
-          })}
-        </ul>
-      </div>
+      <${Folders}
+        folders=${folders}
+        activeFolder=${activeFolder}
+        getBookmarks=${getBookmarks}
+        setActiveFolder=${setActiveFolder}
+      />
+      <${Bookmarks}
+        showGoUp=${showGoUp}
+        goUp=${goUp}
+        bookmarks=${bookmarks}
+        getBookmarks=${getBookmarks}
+      />
       <${FontSettings}
         currentFontSize=${fontSize}
         currentFont=${font}
