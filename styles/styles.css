@@ -13,6 +13,16 @@ body {
   position: relative;
 }
 
+.search {
+  outline: none;
+  border: 1px solid #076678;
+  border-radius: 0;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 10px;
+  margin: 5px;
+}
+
 .folders {
   display: flex;
   flex-wrap: wrap;
@@ -85,19 +95,24 @@ body {
   color: white;
 }
 
-.font-settings {
+.settings {
+  display: flex;
+  align-items: center;
   position: absolute;
   bottom: 36px;
 }
 
-.font-settings button {
+.settings button {
   background-color: #076678;
   color: white;
   outline: none;
   border: none;
   padding: 5px;
-  margin-left: 2px;
+  margin-right: 5px;
   cursor: pointer;
+}
+.settings button.active {
+  background-color: #d65d0e;
 }
 
 .font-settings select {
@@ -108,10 +123,8 @@ body {
 }
 
 .home-switch {
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  bottom: 80px;
+  width: 18px;
+  height: 18px;
   opacity: 0.3;
   cursor: pointer;
 }
@@ -166,12 +179,12 @@ body {
   color: #e9dcc0;
 }
 
-.home .font-settings button {
+.home .settings button {
   color: #65584b;
   background-color: #f0ece1;
 }
 
-.home .font-settings button:hover {
+.home .settings button:hover {
   background-color: #eee2c8;
   color: #714e24;
 }

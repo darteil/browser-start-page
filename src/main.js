@@ -1,10 +1,10 @@
 import FontSettings from "./FontSettings.js";
 import Folders from "./Folders.js";
 import Bookmarks from "./Bookmarks.js"
-import { createBookmarksTree } from "./utils.js";
+import { createBookmarksTree, useDebounce } from "./utils.js";
 
 const { h, render } = preact;
-const { useState, useEffect } = preactHooks;
+const { useState, useEffect, useCallback } = preactHooks;
 const html = htm.bind(h);
 
 /** @jsx h */
@@ -15,6 +15,10 @@ const App = () => {
   const [activeFolder, setActiveFolder] = useState(0);
   const [showGoUp, setShowGoUp] = useState(false);
   const [currentParentId, setCurrentParentId] = useState("0");
+  const [searchValue, setSearchValue] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
+
+  const debouncedSearch = useDebounce(searchValue, 200);
 
   const [isHome, setIsHome] = useState(
     JSON.parse(localStorage.getItem("home_theme")) || false
@@ -110,30 +114,94 @@ const App = () => {
     localStorage.setItem("home_theme", !isHome);
   };
 
+  const searchSetFocus = useCallback((node) => {
+    if (node) node.focus();
+  });
+
+  const toggleSearch = () => {
+    if (!showSearch) {
+      setSearchValue("");
+      setShowSearch(true);
+      setBookmarks([]);
+    } else {
+      setShowSearch(false);
+      if (folders.length > 0) {
+        getBookmarks(folders[0].id, folders[0].parentId);
+        setActiveFolder(folders[0].id);
+      }
+    }
+  }
+
+  useEffect(
+    () => {
+      if (debouncedSearch && debouncedSearch.length >= 3) {
+        chrome.bookmarks.search(searchValue, (result) => {
+          const tempBookmarks = [];
+          const bookmarksTree = createBookmarksTree(result);
+
+          for (let i = 0; i < bookmarksTree.length; i++) {
+            if (bookmarksTree[i].type === "bookmark") {
+              tempBookmarks.push(bookmarksTree[i]);
+            }
+          }
+          setBookmarks(tempBookmarks);
+        });
+      } else {
+        setBookmarks([]);
+      }
+    },
+    [debouncedSearch]
+  );
+
   return html`
     <div
       class="container ${isHome ? "home" : ""}"
       style="font-size: ${fontSize}px; font-family: ${font};"
     >
-      <${Folders}
-        folders=${folders}
-        activeFolder=${activeFolder}
-        getBookmarks=${getBookmarks}
-        setActiveFolder=${setActiveFolder}
-      />
-      <${Bookmarks}
-        showGoUp=${showGoUp}
-        goUp=${goUp}
-        bookmarks=${bookmarks}
-        getBookmarks=${getBookmarks}
-      />
-      <${FontSettings}
-        currentFontSize=${fontSize}
-        currentFont=${font}
-        setFont=${setFontEvent}
-        setSize=${setFontSizeEvent}
-      />
-      <div class="home-switch" onClick=${() => toggleHomeTheme()}>🏡</div>
+      ${showSearch &&
+        html`
+          <span>🔍</span>
+          <input
+            ref=${searchSetFocus}
+            placeholder="Search"
+            class="search"
+            value=${searchValue}
+            onInput=${event => setSearchValue(event.target.value)}
+          />
+          <${Bookmarks}
+            showGoUp=${showGoUp}
+            goUp=${goUp}
+            bookmarks=${bookmarks}
+            getBookmarks=${getBookmarks}
+          />
+          `
+      }
+      ${!showSearch &&
+        html`
+          <${Folders}
+            folders=${folders}
+            activeFolder=${activeFolder}
+            getBookmarks=${getBookmarks}
+            setActiveFolder=${setActiveFolder}
+          />
+          <${Bookmarks}
+            showGoUp=${showGoUp}
+            goUp=${goUp}
+            bookmarks=${bookmarks}
+            getBookmarks=${getBookmarks}
+          />
+        `
+      }
+      <div class="settings">
+        <button class="${showSearch ? "active" : ""}" onClick=${toggleSearch}>Search</button>
+        <${FontSettings}
+          currentFontSize=${fontSize}
+          currentFont=${font}
+          setFont=${setFontEvent}
+          setSize=${setFontSizeEvent}
+        />
+        <div class="home-switch" onClick=${() => toggleHomeTheme()}>🏡</div>
+      </div>
     </div>
   `;
 };

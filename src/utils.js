@@ -1,3 +1,5 @@
+const { useState, useEffect } = preactHooks;
+
 const createBookmarksTree = (chromeBookmarksTree) => {
   if (!chromeBookmarksTree) return [];
 
@@ -26,4 +28,22 @@ const createBookmarksTree = (chromeBookmarksTree) => {
   return bookmarks;
 };
 
-export { createBookmarksTree };
+const useDebounce = (value, delay) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(
+    () => {
+      const handler = setTimeout(() => {
+        setDebouncedValue(value);
+      }, delay);
+      return () => {
+        clearTimeout(handler);
+      };
+    },
+    [value]
+  );
+
+  return debouncedValue;
+}
+
+export { createBookmarksTree, useDebounce };
