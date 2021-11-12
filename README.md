@@ -11,7 +11,7 @@ Google chrome extension.
 
 ### Screenshots
 
-Work theme:
+Default theme:
 ![](./media/screen1.png)
 
 Home theme:
