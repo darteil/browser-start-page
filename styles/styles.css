@@ -8,6 +8,7 @@ body {
 }
 
 .container {
+  background-color: var(--background-color);
   height: 100vh;
   padding: 20px 20px 0 20px;
   position: relative;
@@ -30,25 +31,27 @@ body {
 
 .folders > div {
   padding: 10px;
-  border: 1px solid #282828;
+  border: 1px solid var(--folder-border-color);
+  background-color: var(--folder-background-color);
+  color: var(--folder-color);
   margin: 5px 0 5px 5px;
 }
 
 .folders > div:hover {
-  border-color: #d65d0e;
-  color: #d65d0e;
+  border-color: var(--folder-hover-border-color);
+  color: var(--folder-hover-color);
   cursor: pointer;
 }
 
 .folders .active {
-  border-color: #076678;
-  background-color: #076678;
-  color: white;
+  border-color: var(--folder-active-border-color);
+  background-color: var(--folder-active-background-color);
+  color: var(--folder-active-color);
 }
 
 .folders .active:hover {
-  border-color: #076678;
-  color: white;
+  border-color: var(--folder-hover-active-border-color);
+  color: var(--folder-hover-active-color);
 }
 
 .bookmarks {
@@ -73,126 +76,78 @@ body {
 }
 
 .bookmarks ul li.folder a {
-  color: #d65d0e;
+  color: var(--bookmark-folder-color);
   cursor: pointer;
 }
 
 .bookmarks ul li.folder a:hover {
-  background-color: #076678;
-  color: white;
+  background-color: var(--bookmark-hover-background-color);
+  color: var(--bookmark-hover-folder-color);
 }
 
 .bookmarks ul li a {
   padding: 3px;
   text-decoration: none;
-  color: #282828;
+  color: var(--bookmark-color);
   user-select: none;
 }
 
 .bookmarks ul li a:hover {
   cursor: pointer;
-  background-color: #076678;
-  color: white;
+  background-color: var(--bookmark-hover-background-color);
+  color: var(--bookmark-hover-color);
 }
 
-.settings {
-  display: flex;
-  align-items: center;
+.tools {
   position: absolute;
   bottom: 36px;
 }
 
-.settings button {
-  background-color: #076678;
-  color: white;
+.settings {
+  padding: 5px;
+  border: 1px solid var(--settings-border-color);
+  background-color: var(--settings-background-color);
+  color: var(--settings-color);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 70px;
+}
+
+.font-settings, .toggle-theme {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+button.search-btn, button.settings-btn {
+  background-color: var(--buttons-background-color);
+  color: var(--buttons-color);
   outline: none;
-  border: none;
+  border: 1px solid var(--buttons-border-color);
   padding: 5px;
   margin-right: 5px;
   cursor: pointer;
 }
-.settings button.active {
-  background-color: #d65d0e;
+
+button.search-btn:hover, button.settings-btn:hover {
+  background-color: var(--buttons-hover-background-color);
+  color: var(--buttons-hover-color);
 }
 
-.font-settings select {
+button.active {
+  background-color: var(--buttons-active-background-color);
+  color: var(--buttons-active-color);
+}
+
+button.active:hover {
+  background-color: var(--buttons-hover-active-background-color);
+  color: var(--buttons-hover-active-color);
+}
+
+.toggle-theme select, .font-settings select {
   padding: 2px;
   margin-right: 2px;
   border-radius: 0;
   outline: none;
-}
-
-.home-switch {
-  width: 18px;
-  height: 18px;
-  opacity: 0.3;
-  cursor: pointer;
-}
-
-.home-switch:hover {
-  opacity: 1;
-}
-
-/* home theme */
-
-.container.home {
-  background-color: #e4ddc9;
-  color: #714e24;
-  background-image: url(/assets/images/holo.png);
-  background-position: right bottom;
-  background-repeat: no-repeat;
-}
-
-.home .folders > div {
-  background-color: #f0ece1;
-  border-color: #cec19d;
-}
-
-.home .folders > div:hover {
-  background-color: #eee2c8;
-  color: #714e24;
-}
-
-.home .folders .active {
-  background-color: #675a4d;
-  color: #e9dcc0;
-} 
-
-.home .folders .active:hover {
-  border-color: #cec19d;
-  background-color: #675a4d;
-  color: #e9dcc0;
-}
-
-.home .bookmarks {
-  color: #65584b;
-}
-
-.home .bookmarks ul li a {
-  text-decoration: none;
-  color: #65584b;
-  user-select: none;
-}
-
-.home .bookmarks ul li a:hover {
-  background-color: #675a4d;
-  color: #e9dcc0;
-}
-
-.home .settings button {
-  color: #65584b;
-  background-color: #f0ece1;
-}
-
-.home .settings button:hover {
-  background-color: #eee2c8;
-  color: #714e24;
-}
-
-.home .font-settings select {
-  background-color: #f0ece1;
-}
-
-.home .home-switch {
-  opacity: 1;
 }

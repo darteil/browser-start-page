@@ -27,7 +27,6 @@ const FONT_SIZES = [
 
 const FontSettings = (props) => {
   const [fontList, setFontList] = useState([]);
-  const [show, setShow] = useState(false);
 
   useState(() => {
     chrome.fontSettings.getFontList((list) => {
@@ -37,10 +36,8 @@ const FontSettings = (props) => {
 
   return html`
     <div class="font-settings">
-      ${!show &&
-      html`<button onClick=${() => setShow(true)}>Font settings</botton>`}
-      ${show &&
-      html`
+      <span>Font</span>
+      <div>
         <select
           value=${props.currentFont}
           onChange=${(event) => props.setFont(event.target.value)}
@@ -63,8 +60,7 @@ const FontSettings = (props) => {
               </option>`
           )}
         </select>
-        <button onClick=${() => setShow(false)}>close</button>
-      `}
+      </div>
     </div>
   `;
 };

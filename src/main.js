@@ -1,6 +1,7 @@
 import FontSettings from "./FontSettings.js";
 import Folders from "./Folders.js";
-import Bookmarks from "./Bookmarks.js"
+import Bookmarks from "./Bookmarks.js";
+import ToggleTheme from "./ToggleTheme.js";
 import { createBookmarksTree, useDebounce } from "./utils.js";
 
 const { h, render } = preact;
@@ -17,11 +18,12 @@ const App = () => {
   const [currentParentId, setCurrentParentId] = useState("0");
   const [searchValue, setSearchValue] = useState("");
   const [showSearch, setShowSearch] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
 
   const debouncedSearch = useDebounce(searchValue, 200);
 
-  const [isHome, setIsHome] = useState(
-    JSON.parse(localStorage.getItem("home_theme")) || false
+  const [theme, setTheme] = useState(
+    localStorage.getItem("current_theme") || "default"
   );
   const [font, setFont] = useState(
     localStorage.getItem("current_font") || "Consolas"
@@ -109,9 +111,9 @@ const App = () => {
     localStorage.setItem("current_font_size", size);
   };
 
-  const toggleHomeTheme = () => {
-    setIsHome(!isHome);
-    localStorage.setItem("home_theme", !isHome);
+  const toggleTheme = (theme) => {
+    setTheme(theme);
+    localStorage.setItem("current_theme", theme);
   };
 
   const searchSetFocus = useCallback((node) => {
@@ -155,7 +157,8 @@ const App = () => {
 
   return html`
     <div
-      class="container ${isHome ? "home" : ""}"
+      class="container"
+      data-theme=${theme}
       style="font-size: ${fontSize}px; font-family: ${font};"
     >
       ${showSearch &&
@@ -192,16 +195,27 @@ const App = () => {
           />
         `
       }
-      <div class="settings">
-        <button class="${showSearch ? "active" : ""}" onClick=${toggleSearch}>Search</button>
-        <${FontSettings}
-          currentFontSize=${fontSize}
-          currentFont=${font}
-          setFont=${setFontEvent}
-          setSize=${setFontSizeEvent}
-        />
-        <div class="home-switch" onClick=${() => toggleHomeTheme()}>🏡</div>
+      <div class="tools">
+        <button class="search-btn ${showSearch ? "active" : ""}" onClick=${toggleSearch}>Search</button>
+        <button
+          class="settings-btn ${showSettings ? "active" : ""}"
+          onClick=${() => setShowSettings(!showSettings)}
+        >
+          Settings
+        </button>
       </div>
+      ${showSettings &&
+        html`
+          <div class="settings">
+            <${ToggleTheme} currentTheme=${theme} setTheme=${toggleTheme} />
+            <${FontSettings}
+              currentFontSize=${fontSize}
+              currentFont=${font}
+              setFont=${setFontEvent}
+              setSize=${setFontSizeEvent}
+            />
+          </div>
+       `}
     </div>
   `;
 };
