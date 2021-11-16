@@ -161,8 +161,7 @@ const App = () => {
       data-theme=${theme}
       style="font-size: ${fontSize}px; font-family: ${font};"
     >
-      ${showSearch &&
-        html`
+      ${showSearch ? html`
           <span>🔍</span>
           <input
             ref=${searchSetFocus}
@@ -171,30 +170,21 @@ const App = () => {
             value=${searchValue}
             onInput=${event => setSearchValue(event.target.value)}
           />
-          <${Bookmarks}
-            showGoUp=${showGoUp}
-            goUp=${goUp}
-            bookmarks=${bookmarks}
-            getBookmarks=${getBookmarks}
-          />
-          `
-      }
-      ${!showSearch &&
-        html`
+        ` : html`
           <${Folders}
             folders=${folders}
             activeFolder=${activeFolder}
             getBookmarks=${getBookmarks}
             setActiveFolder=${setActiveFolder}
           />
-          <${Bookmarks}
-            showGoUp=${showGoUp}
-            goUp=${goUp}
-            bookmarks=${bookmarks}
-            getBookmarks=${getBookmarks}
-          />
         `
       }
+      <${Bookmarks}
+        showGoUp=${showGoUp}
+        goUp=${goUp}
+        bookmarks=${bookmarks}
+        getBookmarks=${getBookmarks}
+      />
       <div class="tools">
         <button class="search-btn ${showSearch ? "active" : ""}" onClick=${toggleSearch}>Search</button>
         <button
