@@ -10,7 +10,7 @@ const Bookmarks = ({ showGoUp, goUp, bookmarks, getBookmarks }) => html`
           goUp();
         }}
       >
-        <a>⮤ ...</a>
+        <a class="go-up">⮤ ...</a>
       </li>`}
       ${bookmarks.map((node) => {
         if (node.type === "bookmark") {

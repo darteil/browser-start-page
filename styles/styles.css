@@ -59,16 +59,13 @@ body {
 .bookmarks {
   margin-top: 15px;
   margin-left: 5px;
-}
-
-.bookmarks ul li {
-  padding-bottom: 7px;
+  height: 85vh;
+  overflow: hidden;
 }
 
 .bookmarks ul li > div, .bookmarks ul li.folder > div {
   display: flex;
   align-items: center;
-  height: 16px;
 }
 
 .bookmarks ul li img {
@@ -92,6 +89,12 @@ body {
   text-decoration: none;
   color: var(--bookmark-color);
   user-select: none;
+}
+
+.bookmarks ul li a.go-up {
+  width: 200px;
+  height: 16px;
+  display: block;
 }
 
 .bookmarks ul li a:hover {
