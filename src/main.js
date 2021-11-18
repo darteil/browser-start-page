@@ -162,7 +162,6 @@ const App = () => {
       style="font-size: ${fontSize}px; font-family: ${font};"
     >
       ${showSearch ? html`
-          <span>🔍</span>
           <input
             ref=${searchSetFocus}
             placeholder="Search"

@@ -16,7 +16,9 @@ body {
 
 .search {
   outline: none;
-  border: 1px solid #076678;
+  color: var(--search-color);
+  border: 1px solid var(--search-border-color);
+  background-color: var(--search-background-color);
   border-radius: 0;
   font-size: inherit;
   font-family: inherit;

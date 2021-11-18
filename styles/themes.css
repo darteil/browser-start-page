@@ -35,6 +35,10 @@
     --buttons-hover-background-color: #076678;
     --buttons-hover-active-color: #fff;
     --buttons-hover-active-background-color: #d65d0e;
+
+    --search-color: #282828;
+    --search-border-color: #076678;
+    --search-background-color: #fff;
 }
 
 .container[data-theme='home'] {
@@ -74,6 +78,10 @@
     --buttons-hover-background-color: #eee2c8;
     --buttons-hover-active-color: #e9dcc0;
     --buttons-hover-active-background-color: #675a4d;
+
+    --search-color: #714e24;
+    --search-border-color: #cec19d;
+    --search-background-color: #f0ece1;
 
     background-image: url(/assets/images/holo.png);
     background-position: right bottom;
