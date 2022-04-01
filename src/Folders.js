@@ -1,7 +1,12 @@
 const { h } = preact;
 const html = htm.bind(h);
 
-const Folders = ({ folders, activeFolder, getBookmarks, setActiveFolder }) => html`
+const Folders = ({
+  folders,
+  activeFolder,
+  getBookmarks,
+  setActiveFolder,
+}) => html`
   <div class="folders">
     ${folders.map(
       (folder) =>

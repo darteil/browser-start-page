@@ -16,7 +16,7 @@ const Bookmarks = ({ showGoUp, goUp, bookmarks, getBookmarks }) => html`
         if (node.type === "bookmark") {
           return html`<li>
             <div>
-              <img src=${`chrome://favicon/${node.url}`}/>
+              <img src=${`chrome://favicon/${node.url}`} />
               <a href=${node.url}>${node.title}</a>
             </div>
           </li>`;

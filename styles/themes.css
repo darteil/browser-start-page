@@ -1,89 +1,89 @@
-.container[data-theme='default'] {
-    --background-color: #fff;
+.container[data-theme="default"] {
+  --background-color: #fff;
 
-    --folder-color: #282828;
-    --folder-background-color: #fff;
-    --folder-border-color: #282828;
+  --folder-color: #282828;
+  --folder-background-color: #fff;
+  --folder-border-color: #282828;
 
-    --folder-active-color: #fff;
-    --folder-active-background-color: #076678;
-    --folder-active-border-color: #076678;
+  --folder-active-color: #fff;
+  --folder-active-background-color: #076678;
+  --folder-active-border-color: #076678;
 
-    --folder-hover-color: #d65d0e;
-    --folder-hover-border-color: #d65d0e;
-    --folder-hover-active-color: #fff;
-    --folder-hover-active-border-color: #076678;
-    --folder-hover-background-color: #fff;
+  --folder-hover-color: #d65d0e;
+  --folder-hover-border-color: #d65d0e;
+  --folder-hover-active-color: #fff;
+  --folder-hover-active-border-color: #076678;
+  --folder-hover-background-color: #fff;
 
-    --bookmark-color: #282828;
-    --bookmark-folder-color: #d65d0e;
+  --bookmark-color: #282828;
+  --bookmark-folder-color: #d65d0e;
 
-    --bookmark-hover-color: #fff;
-    --bookmark-hover-folder-color: #fff;
-    --bookmark-hover-background-color: #076678;
+  --bookmark-hover-color: #fff;
+  --bookmark-hover-folder-color: #fff;
+  --bookmark-hover-background-color: #076678;
 
-    --settings-color: #fff;
-    --settings-border-color: #076678;
-    --settings-background-color: #076678;
+  --settings-color: #fff;
+  --settings-border-color: #076678;
+  --settings-background-color: #076678;
 
-    --buttons-color: #fff;
-    --buttons-border-color: #076678;
-    --buttons-active-color: #fff;
-    --buttons-active-background-color: #d65d0e;
-    --buttons-background-color: #076678;
-    --buttons-hover-color: #fff;
-    --buttons-hover-background-color: #076678;
-    --buttons-hover-active-color: #fff;
-    --buttons-hover-active-background-color: #d65d0e;
+  --buttons-color: #fff;
+  --buttons-border-color: #076678;
+  --buttons-active-color: #fff;
+  --buttons-active-background-color: #d65d0e;
+  --buttons-background-color: #076678;
+  --buttons-hover-color: #fff;
+  --buttons-hover-background-color: #076678;
+  --buttons-hover-active-color: #fff;
+  --buttons-hover-active-background-color: #d65d0e;
 
-    --search-color: #282828;
-    --search-border-color: #076678;
-    --search-background-color: #fff;
+  --search-color: #282828;
+  --search-border-color: #076678;
+  --search-background-color: #fff;
 }
 
-.container[data-theme='home'] {
-    --background-color: #e4ddc9;
+.container[data-theme="home"] {
+  --background-color: #e4ddc9;
 
-    --folder-color: #714e24;
-    --folder-background-color: #f0ece1;
-    --folder-border-color: #cec19d;
+  --folder-color: #714e24;
+  --folder-background-color: #f0ece1;
+  --folder-border-color: #cec19d;
 
-    --folder-active-color: #e9dcc0;
-    --folder-active-background-color: #675a4d;
-    --folder-active-border-color: #675a4d;
+  --folder-active-color: #e9dcc0;
+  --folder-active-background-color: #675a4d;
+  --folder-active-border-color: #675a4d;
 
-    --folder-hover-color: #714e24;
-    --folder-hover-border-color: #675a4d;
-    --folder-hover-active-color: #e9dcc0;
-    --folder-hover-active-border-color: #675a4d;
-    --folder-hover-background-color: #eee2c8;
+  --folder-hover-color: #714e24;
+  --folder-hover-border-color: #675a4d;
+  --folder-hover-active-color: #e9dcc0;
+  --folder-hover-active-border-color: #675a4d;
+  --folder-hover-background-color: #eee2c8;
 
-    --bookmark-color: #65584b;
-    --bookmark-folder-color: #714e24;
+  --bookmark-color: #65584b;
+  --bookmark-folder-color: #714e24;
 
-    --bookmark-hover-color: #e9dcc0;
-    --bookmark-hover-folder-color:#e9dcc0;
-    --bookmark-hover-background-color: #675a4d;
+  --bookmark-hover-color: #e9dcc0;
+  --bookmark-hover-folder-color: #e9dcc0;
+  --bookmark-hover-background-color: #675a4d;
 
-    --settings-color: #714e24;
-    --settings-border-color: #cec19d;
-    --settings-background-color: #f0ece1;
+  --settings-color: #714e24;
+  --settings-border-color: #cec19d;
+  --settings-background-color: #f0ece1;
 
-    --buttons-color: #65584b;
-    --buttons-border-color: #cec19d;
-    --buttons-active-color: #e9dcc0;
-    --buttons-active-background-color: #675a4d;
-    --buttons-background-color: #f0ece1;
-    --buttons-hover-color: #714e24;
-    --buttons-hover-background-color: #eee2c8;
-    --buttons-hover-active-color: #e9dcc0;
-    --buttons-hover-active-background-color: #675a4d;
+  --buttons-color: #65584b;
+  --buttons-border-color: #cec19d;
+  --buttons-active-color: #e9dcc0;
+  --buttons-active-background-color: #675a4d;
+  --buttons-background-color: #f0ece1;
+  --buttons-hover-color: #714e24;
+  --buttons-hover-background-color: #eee2c8;
+  --buttons-hover-active-color: #e9dcc0;
+  --buttons-hover-active-background-color: #675a4d;
 
-    --search-color: #714e24;
-    --search-border-color: #cec19d;
-    --search-background-color: #f0ece1;
+  --search-color: #714e24;
+  --search-border-color: #cec19d;
+  --search-background-color: #f0ece1;
 
-    background-image: url(/assets/images/holo.png);
-    background-position: right bottom;
-    background-repeat: no-repeat;
+  background-image: url(/assets/images/holo.png);
+  background-position: right bottom;
+  background-repeat: no-repeat;
 }

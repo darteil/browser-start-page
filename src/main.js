@@ -132,28 +132,25 @@ const App = () => {
         setActiveFolder(folders[0].id);
       }
     }
-  }
+  };
 
-  useEffect(
-    () => {
-      if (debouncedSearch && debouncedSearch.length >= 3) {
-        chrome.bookmarks.search(searchValue, (result) => {
-          const tempBookmarks = [];
-          const bookmarksTree = createBookmarksTree(result);
+  useEffect(() => {
+    if (debouncedSearch && debouncedSearch.length >= 3) {
+      chrome.bookmarks.search(searchValue, (result) => {
+        const tempBookmarks = [];
+        const bookmarksTree = createBookmarksTree(result);
 
-          for (let i = 0; i < bookmarksTree.length; i++) {
-            if (bookmarksTree[i].type === "bookmark") {
-              tempBookmarks.push(bookmarksTree[i]);
-            }
+        for (let i = 0; i < bookmarksTree.length; i++) {
+          if (bookmarksTree[i].type === "bookmark") {
+            tempBookmarks.push(bookmarksTree[i]);
           }
-          setBookmarks(tempBookmarks);
-        });
-      } else {
-        setBookmarks([]);
-      }
-    },
-    [debouncedSearch]
-  );
+        }
+        setBookmarks(tempBookmarks);
+      });
+    } else {
+      setBookmarks([]);
+    }
+  }, [debouncedSearch]);
 
   return html`
     <div
@@ -161,23 +158,24 @@ const App = () => {
       data-theme=${theme}
       style="font-size: ${fontSize}px; font-family: ${font};"
     >
-      ${showSearch ? html`
-          <input
-            ref=${searchSetFocus}
-            placeholder="Search"
-            class="search"
-            value=${searchValue}
-            onInput=${event => setSearchValue(event.target.value)}
-          />
-        ` : html`
-          <${Folders}
-            folders=${folders}
-            activeFolder=${activeFolder}
-            getBookmarks=${getBookmarks}
-            setActiveFolder=${setActiveFolder}
-          />
-        `
-      }
+      ${showSearch
+        ? html`
+            <input
+              ref=${searchSetFocus}
+              placeholder="Search"
+              class="search"
+              value=${searchValue}
+              onInput=${(event) => setSearchValue(event.target.value)}
+            />
+          `
+        : html`
+            <${Folders}
+              folders=${folders}
+              activeFolder=${activeFolder}
+              getBookmarks=${getBookmarks}
+              setActiveFolder=${setActiveFolder}
+            />
+          `}
       <${Bookmarks}
         showGoUp=${showGoUp}
         goUp=${goUp}
@@ -185,7 +183,12 @@ const App = () => {
         getBookmarks=${getBookmarks}
       />
       <div class="tools">
-        <button class="search-btn ${showSearch ? "active" : ""}" onClick=${toggleSearch}>Search</button>
+        <button
+          class="search-btn ${showSearch ? "active" : ""}"
+          onClick=${toggleSearch}
+        >
+          Search
+        </button>
         <button
           class="settings-btn ${showSettings ? "active" : ""}"
           onClick=${() => setShowSettings(!showSettings)}
@@ -194,17 +197,17 @@ const App = () => {
         </button>
       </div>
       ${showSettings &&
-        html`
-          <div class="settings">
-            <${ToggleTheme} currentTheme=${theme} setTheme=${toggleTheme} />
-            <${FontSettings}
-              currentFontSize=${fontSize}
-              currentFont=${font}
-              setFont=${setFontEvent}
-              setSize=${setFontSizeEvent}
-            />
-          </div>
-       `}
+      html`
+        <div class="settings">
+          <${ToggleTheme} currentTheme=${theme} setTheme=${toggleTheme} />
+          <${FontSettings}
+            currentFontSize=${fontSize}
+            currentFont=${font}
+            setFont=${setFontEvent}
+            setSize=${setFontSizeEvent}
+          />
+        </div>
+      `}
     </div>
   `;
 };

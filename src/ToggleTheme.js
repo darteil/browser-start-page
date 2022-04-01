@@ -2,10 +2,7 @@ const { h } = preact;
 const { useState } = preactHooks;
 const html = htm.bind(h);
 
-const themes = [
-  "default",
-  "home"
-];
+const themes = ["default", "home"];
 
 const ToggleTheme = ({ currentTheme, setTheme }) => html`
   <div class="toggle-theme">
@@ -17,10 +14,8 @@ const ToggleTheme = ({ currentTheme, setTheme }) => html`
       >
         ${themes.map(
           (theme) =>
-            html`<option key=${theme} value=${theme}>
-              ${theme}
-            </option>
-          `)}
+            html`<option key=${theme} value=${theme}>${theme}</option> `
+        )}
       </select>
     </div>
   </div>
