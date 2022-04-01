@@ -3,12 +3,8 @@
   "description": "Start page",
   "version": "1.0",
   "manifest_version": 2,
-  "permissions": [
-    "tabs",
-    "bookmarks",
-    "fontSettings",
-    "chrome://favicon/"
-  ],
+  "permissions": ["tabs", "bookmarks", "fontSettings", "chrome://favicon/"],
+  "incognito": "split",
   "chrome_url_overrides": {
     "newtab": "start.html"
   },
