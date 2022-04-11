@@ -87,3 +87,50 @@
   background-position: right bottom;
   background-repeat: no-repeat;
 }
+
+.container[data-theme="incognito"] {
+  --background-color: #303030;
+
+  --folder-color: #a4a4a4;
+  --folder-background-color: #505050;
+  --folder-border-color: #a4a4a4;
+
+  --folder-active-color: #303030;
+  --folder-active-background-color: #dcdcdc;
+  --folder-active-border-color: #a4a4a4;
+
+  --folder-hover-color: #dcdcdc;
+  --folder-hover-border-color: #dcdcdc;
+  --folder-hover-active-color: #303030;
+  --folder-hover-active-border-color: #a4a4a4;
+  --folder-hover-background-color: #dcdcdc;
+
+  --bookmark-color: #dcdcdc;
+  --bookmark-folder-color: #d65d0e;
+
+  --bookmark-hover-color: #dcdcdc;
+  --bookmark-hover-folder-color: #dcdcdc;
+  --bookmark-hover-background-color: #505050;
+
+  --settings-color: #dcdcdc;
+  --settings-border-color: #a4a4a4;
+  --settings-background-color: #505050;
+
+  --buttons-color: #a4a4a4;
+  --buttons-border-color: #a4a4a4;
+  --buttons-active-color: #303030;
+  --buttons-active-background-color: #dcdcdc;
+  --buttons-background-color: #505050;
+  --buttons-hover-color: #dcdcdc;
+  --buttons-hover-background-color: #505050;
+  --buttons-hover-active-color: #303030;
+  --buttons-hover-active-background-color: #dcdcdc;
+
+  --search-color: #303030;
+  --search-border-color: #a4a4a4;
+  --search-background-color: #dcdcdc;
+
+  background-image: url(/assets/images/incognito.png);
+  background-position: right 40px bottom 35px;
+  background-repeat: no-repeat;
+}

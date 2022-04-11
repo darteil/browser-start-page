@@ -21,10 +21,12 @@ const App = () => {
   const [showSettings, setShowSettings] = useState(false);
 
   const debouncedSearch = useDebounce(searchValue, 200);
+  const getCurrentTheme = () => {
+    if (chrome.extension.inIncognitoContext) return "incognito";
+    return localStorage.getItem("current_theme") || "default";
+  };
 
-  const [theme, setTheme] = useState(
-    localStorage.getItem("current_theme") || "default"
-  );
+  const [theme, setTheme] = useState(getCurrentTheme());
   const [font, setFont] = useState(
     localStorage.getItem("current_font") || "Consolas"
   );
@@ -103,17 +105,23 @@ const App = () => {
 
   const setFontEvent = (fontName) => {
     setFont(fontName);
-    localStorage.setItem("current_font", fontName);
+    if (!chrome.extension.inIncognitoContext) {
+      localStorage.setItem("current_font", fontName);
+    }
   };
 
   const setFontSizeEvent = (size) => {
     setFontSize(size);
-    localStorage.setItem("current_font_size", size);
+    if (!chrome.extension.inIncognitoContext) {
+      localStorage.setItem("current_font_size", size);
+    }
   };
 
   const toggleTheme = (theme) => {
     setTheme(theme);
-    localStorage.setItem("current_theme", theme);
+    if (!chrome.extension.inIncognitoContext) {
+      localStorage.setItem("current_theme", theme);
+    }
   };
 
   const searchSetFocus = useCallback((node) => {

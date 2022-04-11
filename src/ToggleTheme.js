@@ -2,7 +2,7 @@ const { h } = preact;
 const { useState } = preactHooks;
 const html = htm.bind(h);
 
-const themes = ["default", "home"];
+const themes = ["default", "home", "incognito"];
 
 const ToggleTheme = ({ currentTheme, setTheme }) => html`
   <div class="toggle-theme">
