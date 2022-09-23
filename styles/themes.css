@@ -83,9 +83,9 @@
   --search-border-color: #cec19d;
   --search-background-color: #f0ece1;
 
-  background-image: url(/assets/images/holo.png);
+  /*background-image: url(/assets/images/holo.png);
   background-position: right bottom;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;*/
 }
 
 .container[data-theme="incognito"] {
@@ -130,7 +130,7 @@
   --search-border-color: #a4a4a4;
   --search-background-color: #dcdcdc;
 
-  background-image: url(/assets/images/incognito.png);
+  /*background-image: url(/assets/images/incognito.png);
   background-position: right 40px bottom 35px;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;*/
 }
