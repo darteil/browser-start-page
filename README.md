@@ -3,6 +3,7 @@
 Google chrome extension.
 
 ### Installation Instructions
+
 1. Download this repo as a [ZIP file from GitHub](https://github.com/darteil/browser-start-page/archive/refs/heads/master.zip).
 2. Unzip the file and you should have a folder named `browser-start-page-master`.
 3. Go to the extensions page (`chrome://extensions`).
@@ -26,4 +27,5 @@ Bookmarks structure:
 [htm](https://github.com/developit/htm)
 
 ### License
-MIT License, Copyright (c) 2021 Romanov Yuri
+
+MIT License, Copyright (c) 2022 Romanov Yuri
