@@ -1,6 +1,13 @@
 const { h } = preact;
 const html = htm.bind(h);
 
+const createFaviconURL = (url) => {
+  const favUrl = new URL(chrome.runtime.getURL("/_favicon/"));
+  favUrl.searchParams.set("pageUrl", url);
+  favUrl.searchParams.set("size", "16");
+  return favUrl.toString();
+};
+
 const Bookmarks = ({ showGoUp, goUp, bookmarks, getBookmarks }) => html`
   <div class="bookmarks">
     <ul>
@@ -16,7 +23,7 @@ const Bookmarks = ({ showGoUp, goUp, bookmarks, getBookmarks }) => html`
         if (node.type === "bookmark") {
           return html`<li>
             <div>
-              <img src=${`chrome://favicon/${node.url}`} />
+              <img src=${createFaviconURL(node.url)} />
               <a href=${node.url}>${node.title}</a>
             </div>
           </li>`;
