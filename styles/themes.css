@@ -1,43 +1,43 @@
 .container[data-theme="default"] {
-  --background-color: #fff;
+  --background-color: #f8f8f8;
 
-  --folder-color: #282828;
-  --folder-background-color: #fff;
-  --folder-border-color: #282828;
+  --folder-color: #353535;
+  --folder-background-color: #ebedef;
+  --folder-border-color: #353535;
 
-  --folder-active-color: #fff;
-  --folder-active-background-color: #076678;
-  --folder-active-border-color: #076678;
+  --folder-active-color: #353535;
+  --folder-active-background-color: #c3c7cc;
+  --folder-active-border-color: #353535;
 
-  --folder-hover-color: #d65d0e;
-  --folder-hover-border-color: #d65d0e;
-  --folder-hover-active-color: #fff;
-  --folder-hover-active-border-color: #076678;
-  --folder-hover-background-color: #fff;
+  --folder-hover-color: #386ac3;
+  --folder-hover-border-color: #386ac3;
+  --folder-hover-active-color: #353535;
+  --folder-hover-active-border-color: #353535;
+  --folder-hover-background-color: #c3c7cc;
 
-  --bookmark-color: #282828;
-  --bookmark-folder-color: #d65d0e;
+  --bookmark-color: #353535;
+  --bookmark-folder-color: #e88501;
 
-  --bookmark-hover-color: #fff;
-  --bookmark-hover-folder-color: #fff;
-  --bookmark-hover-background-color: #076678;
+  --bookmark-hover-color: #f8f8f8;
+  --bookmark-hover-folder-color: #f8f8f8;
+  --bookmark-hover-background-color: #386ac3;
 
-  --settings-color: #fff;
-  --settings-border-color: #076678;
-  --settings-background-color: #076678;
+  --settings-color: #353535;
+  --settings-border-color: #353535;
+  --settings-background-color: #ebedef;
 
-  --buttons-color: #fff;
-  --buttons-border-color: #076678;
-  --buttons-active-color: #fff;
-  --buttons-active-background-color: #d65d0e;
-  --buttons-background-color: #076678;
-  --buttons-hover-color: #fff;
-  --buttons-hover-background-color: #076678;
-  --buttons-hover-active-color: #fff;
-  --buttons-hover-active-background-color: #d65d0e;
+  --buttons-color: #353535;
+  --buttons-border-color: #353535;
+  --buttons-active-color: #353535;
+  --buttons-active-background-color: #c3c7cc;
+  --buttons-background-color: #ebedef;
+  --buttons-hover-color: #386ac3;
+  --buttons-hover-background-color: #ebedef;
+  --buttons-hover-active-color: #353535;
+  --buttons-hover-active-background-color: #c3c7cc;
 
-  --search-color: #282828;
-  --search-border-color: #076678;
+  --search-color: #353535;
+  --search-border-color: #353535;
   --search-background-color: #fff;
 }
 
