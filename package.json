@@ -2,26 +2,25 @@
   "name": "browser-start-page",
   "version": "0.0.1",
   "description": "Start page extension for chromium based browsers",
-  "main": "index.js",
+  "author": "Romanov Yuri",
+  "license": "MIT",
+  "homepage": "https://github.com/darteil/browser-start-page#readme",
+  "main": "main.js",
   "scripts": {
     "build": "vite build",
     "build:watch": "vite build --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/darteil/browser-start-page.git"
   },
   "keywords": [
     "extension",
     "chrome"
   ],
-  "author": "Romanov Yuri",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/darteil/browser-start-page/issues"
-  },
-  "homepage": "https://github.com/darteil/browser-start-page#readme",
   "devDependencies": {
+    "eslint": "^8.56.0",
+    "prettier": "3.2.5",
     "vite": "^5.0.11"
+  },
+  "dependencies": {
+    "htm": "^3.1.1",
+    "preact": "^10.19.4"
   }
 }
