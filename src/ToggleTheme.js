@@ -1,21 +1,13 @@
-const { h } = preact;
-const { useState } = preactHooks;
-const html = htm.bind(h);
+import { html } from 'htm/preact/index.js';
 
-const themes = ["default", "home", "incognito"];
+const themes = ['default', 'home', 'incognito'];
 
 const ToggleTheme = ({ currentTheme, setTheme }) => html`
   <div class="toggle-theme">
     <span>Theme</span>
     <div>
-      <select
-        value=${currentTheme}
-        onChange=${(event) => setTheme(event.target.value)}
-      >
-        ${themes.map(
-          (theme) =>
-            html`<option key=${theme} value=${theme}>${theme}</option> `
-        )}
+      <select value=${currentTheme} onChange=${(event) => setTheme(event.target.value)}>
+        ${themes.map((theme) => html`<option key=${theme} value=${theme}>${theme}</option>`)}
       </select>
     </div>
   </div>

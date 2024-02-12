@@ -1,10 +1,10 @@
-const { h } = preact;
-const html = htm.bind(h);
+/* global chrome */
+import { html } from 'htm/preact/index.js';
 
 const createFaviconURL = (url) => {
-  const favUrl = new URL(chrome.runtime.getURL("/_favicon/"));
-  favUrl.searchParams.set("pageUrl", url);
-  favUrl.searchParams.set("size", "16");
+  const favUrl = new URL(chrome.runtime.getURL('/_favicon/'));
+  favUrl.searchParams.set('pageUrl', url);
+  favUrl.searchParams.set('size', '16');
   return favUrl.toString();
 };
 
@@ -20,7 +20,7 @@ const Bookmarks = ({ showGoUp, goUp, bookmarks, getBookmarks }) => html`
         <a class="go-up">⮤ ...</a>
       </li>`}
       ${bookmarks.map((node) => {
-        if (node.type === "bookmark") {
+        if (node.type === 'bookmark') {
           return html`<li>
             <div>
               <img src=${createFaviconURL(node.url)} />
@@ -35,7 +35,7 @@ const Bookmarks = ({ showGoUp, goUp, bookmarks, getBookmarks }) => html`
           }}
         >
           <div>
-            <img src="./assets/images/folder.ico" />
+            <img src="folder.ico" />
             <a>${node.title}</a>
           </div>
         </li>`;

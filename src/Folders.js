@@ -1,25 +1,19 @@
-const { h } = preact;
-const html = htm.bind(h);
+import { html } from 'htm/preact/index.js';
 
-const Folders = ({
-  folders,
-  activeFolder,
-  getBookmarks,
-  setActiveFolder,
-}) => html`
+const Folders = ({ folders, activeFolder, getBookmarks, setActiveFolder }) => html`
   <div class="folders">
     ${folders.map(
       (folder) =>
         html`<div
           key=${folder.id}
-          class=${folder.id === activeFolder ? "active" : ""}
+          class=${folder.id === activeFolder ? 'active' : ''}
           onClick=${() => {
             getBookmarks(folder.id, folder.parentId);
             setActiveFolder(folder.id);
           }}
         >
           <p>${folder.title}</p>
-        </div>`
+        </div>`,
     )}
   </div>
 `;

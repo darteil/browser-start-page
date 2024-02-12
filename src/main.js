@@ -1,12 +1,16 @@
-import FontSettings from "./FontSettings.js";
-import Folders from "./Folders.js";
-import Bookmarks from "./Bookmarks.js";
-import ToggleTheme from "./ToggleTheme.js";
-import { createBookmarksTree, useDebounce } from "./utils.js";
+/* global chrome */
+import { render } from 'preact';
+import { useState, useEffect, useCallback } from 'preact/hooks';
+import { html } from 'htm/preact/index.js';
 
-const { h, render } = preact;
-const { useState, useEffect, useCallback } = preactHooks;
-const html = htm.bind(h);
+import FontSettings from './FontSettings.js';
+import Folders from './Folders.js';
+import Bookmarks from './Bookmarks.js';
+import ToggleTheme from './ToggleTheme.js';
+import { createBookmarksTree, useDebounce } from './utils.js';
+import './styles/reset.css';
+import './styles/styles.css';
+import './styles/themes.css';
 
 /** @jsx h */
 
@@ -15,37 +19,33 @@ const App = () => {
   const [folders, setFolders] = useState([]);
   const [activeFolder, setActiveFolder] = useState(0);
   const [showGoUp, setShowGoUp] = useState(false);
-  const [currentParentId, setCurrentParentId] = useState("0");
-  const [searchValue, setSearchValue] = useState("");
+  const [currentParentId, setCurrentParentId] = useState('0');
+  const [searchValue, setSearchValue] = useState('');
   const [showSearch, setShowSearch] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
 
   const debouncedSearch = useDebounce(searchValue, 200);
   const getCurrentTheme = () => {
-    if (chrome.extension.inIncognitoContext) return "incognito";
-    return localStorage.getItem("current_theme") || "default";
+    if (chrome.extension.inIncognitoContext) return 'incognito';
+    return localStorage.getItem('current_theme') || 'default';
   };
 
   const [theme, setTheme] = useState(getCurrentTheme());
-  const [font, setFont] = useState(
-    localStorage.getItem("current_font") || "Consolas"
-  );
-  const [fontSize, setFontSize] = useState(
-    localStorage.getItem("current_font_size") || "16"
-  );
+  const [font, setFont] = useState(localStorage.getItem('current_font') || 'Consolas');
+  const [fontSize, setFontSize] = useState(localStorage.getItem('current_font_size') || '16');
 
   useEffect(() => {
-    chrome.bookmarks.getSubTree("1", (chromeBookmarks) => {
+    chrome.bookmarks.getSubTree('1', (chromeBookmarks) => {
       const bookmarksTree = createBookmarksTree(chromeBookmarks);
       const tempFolders = [];
 
       let mainBarHasBookmarks = false;
 
       for (let i = 0; i < bookmarksTree[0].bookmarks.length; i++) {
-        if (bookmarksTree[0].bookmarks[i].type === "bookmark") {
+        if (bookmarksTree[0].bookmarks[i].type === 'bookmark') {
           mainBarHasBookmarks = true;
         }
-        if (bookmarksTree[0].bookmarks[i].type === "folder") {
+        if (bookmarksTree[0].bookmarks[i].type === 'folder') {
           tempFolders.push(bookmarksTree[0].bookmarks[i]);
         }
       }
@@ -54,7 +54,7 @@ const App = () => {
         tempFolders.unshift({
           id: bookmarksTree[0].id,
           parentId: bookmarksTree[0].parentId,
-          type: "bookmark bar",
+          type: 'bookmark bar',
           title: bookmarksTree[0].title,
         });
       }
@@ -71,7 +71,7 @@ const App = () => {
   }, [folders]);
 
   useEffect(() => {
-    if (currentParentId === "1" || currentParentId === "0") {
+    if (currentParentId === '1' || currentParentId === '0') {
       setShowGoUp(false);
     } else {
       setShowGoUp(true);
@@ -84,10 +84,10 @@ const App = () => {
       const bookmarksTree = createBookmarksTree(chromeBookmarks);
 
       for (let i = 0; i < bookmarksTree[0].bookmarks.length; i++) {
-        if (bookmarksTree[0].bookmarks[i].type === "bookmark") {
+        if (bookmarksTree[0].bookmarks[i].type === 'bookmark') {
           tempBookmarks.push(bookmarksTree[0].bookmarks[i]);
         } else {
-          if (bookmarksTree[0].id !== "1") {
+          if (bookmarksTree[0].id !== '1') {
             tempBookmarks.push(bookmarksTree[0].bookmarks[i]);
           }
         }
@@ -106,21 +106,21 @@ const App = () => {
   const setFontEvent = (fontName) => {
     setFont(fontName);
     if (!chrome.extension.inIncognitoContext) {
-      localStorage.setItem("current_font", fontName);
+      localStorage.setItem('current_font', fontName);
     }
   };
 
   const setFontSizeEvent = (size) => {
     setFontSize(size);
     if (!chrome.extension.inIncognitoContext) {
-      localStorage.setItem("current_font_size", size);
+      localStorage.setItem('current_font_size', size);
     }
   };
 
   const toggleTheme = (theme) => {
     setTheme(theme);
     if (!chrome.extension.inIncognitoContext) {
-      localStorage.setItem("current_theme", theme);
+      localStorage.setItem('current_theme', theme);
     }
   };
 
@@ -130,7 +130,7 @@ const App = () => {
 
   const toggleSearch = () => {
     if (!showSearch) {
-      setSearchValue("");
+      setSearchValue('');
       setShowSearch(true);
       setBookmarks([]);
     } else {
@@ -149,7 +149,7 @@ const App = () => {
         const bookmarksTree = createBookmarksTree(result);
 
         for (let i = 0; i < bookmarksTree.length; i++) {
-          if (bookmarksTree[i].type === "bookmark") {
+          if (bookmarksTree[i].type === 'bookmark') {
             tempBookmarks.push(bookmarksTree[i]);
           }
         }
@@ -161,11 +161,7 @@ const App = () => {
   }, [debouncedSearch]);
 
   return html`
-    <div
-      class="container"
-      data-theme=${theme}
-      style="font-size: ${fontSize}px; font-family: ${font};"
-    >
+    <div class="container" data-theme=${theme} style="font-size: ${fontSize}px; font-family: ${font};">
       ${showSearch
         ? html`
             <input
@@ -184,23 +180,10 @@ const App = () => {
               setActiveFolder=${setActiveFolder}
             />
           `}
-      <${Bookmarks}
-        showGoUp=${showGoUp}
-        goUp=${goUp}
-        bookmarks=${bookmarks}
-        getBookmarks=${getBookmarks}
-      />
+      <${Bookmarks} showGoUp=${showGoUp} goUp=${goUp} bookmarks=${bookmarks} getBookmarks=${getBookmarks} />
       <div class="tools">
-        <button
-          class="search-btn ${showSearch ? "active" : ""}"
-          onClick=${toggleSearch}
-        >
-          Search
-        </button>
-        <button
-          class="settings-btn ${showSettings ? "active" : ""}"
-          onClick=${() => setShowSettings(!showSettings)}
-        >
+        <button class="search-btn ${showSearch ? 'active' : ''}" onClick=${toggleSearch}>Search</button>
+        <button class="settings-btn ${showSettings ? 'active' : ''}" onClick=${() => setShowSettings(!showSettings)}>
           Settings
         </button>
       </div>
@@ -220,4 +203,4 @@ const App = () => {
   `;
 };
 
-render(html` <${App} /> `, document.getElementById("root"));
+render(html` <${App} /> `, document.getElementById('root'));

@@ -1,4 +1,4 @@
-const { useState, useEffect } = preactHooks;
+import { useEffect, useState } from 'preact/hooks';
 
 const createBookmarksTree = (chromeBookmarksTree) => {
   if (!chromeBookmarksTree) return [];
@@ -10,7 +10,7 @@ const createBookmarksTree = (chromeBookmarksTree) => {
       bookmarks.push({
         id: chromeBookmarksTree[i].id,
         parentId: chromeBookmarksTree[i].parentId,
-        type: "bookmark",
+        type: 'bookmark',
         title: chromeBookmarksTree[i].title,
         url: chromeBookmarksTree[i].url,
       });
@@ -18,7 +18,7 @@ const createBookmarksTree = (chromeBookmarksTree) => {
       bookmarks.push({
         id: chromeBookmarksTree[i].id,
         parentId: chromeBookmarksTree[i].parentId,
-        type: "folder",
+        type: 'folder',
         title: chromeBookmarksTree[i].title,
         bookmarks: createBookmarksTree(chromeBookmarksTree[i].children),
       });
