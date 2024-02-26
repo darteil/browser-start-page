@@ -1,4 +1,4 @@
-import { html } from 'htm/preact/index.js';
+import { html } from 'htm/preact';
 
 const Folders = ({ folders, activeFolder, getBookmarks, setActiveFolder }) => html`
   <div class="folders">

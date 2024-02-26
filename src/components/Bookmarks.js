@@ -1,5 +1,5 @@
 /* global chrome */
-import { html } from 'htm/preact/index.js';
+import { html } from 'htm/preact';
 
 const createFaviconURL = (url) => {
   const favUrl = new URL(chrome.runtime.getURL('/_favicon/'));

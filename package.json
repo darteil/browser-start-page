@@ -6,6 +6,7 @@
   "license": "MIT",
   "homepage": "https://github.com/darteil/browser-start-page#readme",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "build": "vite build",
     "build:watch": "vite build --watch"

@@ -1,6 +1,6 @@
 /* global chrome */
 import { useState } from 'preact/hooks';
-import { html } from 'htm/preact/index.js';
+import { html } from 'htm/preact';
 
 const FONT_SIZES = [
   '6',
