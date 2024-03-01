@@ -132,6 +132,10 @@ const App = () => {
         type: actions.SET_BOOKMARKS,
         bookmarks: [],
       });
+      dispatch({
+        type: actions.SET_SHOW_GO_UP,
+        value: false,
+      });
     } else {
       dispatch({
         type: actions.SET_SHOW_SEARCH,
