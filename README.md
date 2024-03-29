@@ -1,4 +1,4 @@
-## Simple start page with bookmarks
+## Simple start page for bookmarks 
 
 Google chrome extension.
 
