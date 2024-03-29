@@ -35,7 +35,7 @@ const Bookmarks = ({ showGoUp, goUp, bookmarks, getBookmarks }) => html`
           }}
         >
           <div>
-            <img src="folder.ico" />
+            <img src="folder.svg" />
             <a>${node.title}</a>
           </div>
         </li>`;

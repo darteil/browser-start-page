@@ -12,6 +12,7 @@ const Folders = ({ folders, activeFolder, getBookmarks, setActiveFolder }) => ht
             setActiveFolder(folder.id);
           }}
         >
+          <img src="folder.svg" />
           <p>${folder.title}</p>
         </div>`,
     )}

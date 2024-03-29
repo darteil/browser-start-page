@@ -35,6 +35,8 @@ body {
 
 .folders > div {
   padding: 10px;
+  display: flex;
+  align-items: center;
   border: 1px solid var(--folder-border-color);
   background-color: var(--folder-background-color);
   color: var(--folder-color);
@@ -56,6 +58,13 @@ body {
 .folders .active:hover {
   border-color: var(--folder-hover-active-border-color);
   color: var(--folder-hover-active-color);
+}
+
+.folders > div > img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
 }
 
 .bookmarks {
