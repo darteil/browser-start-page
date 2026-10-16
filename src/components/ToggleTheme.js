@@ -1,6 +1,6 @@
 import { html } from 'htm/preact';
 
-const themes = ['default', 'home', 'incognito'];
+const themes = ['default', 'home'];
 
 const ToggleTheme = ({ currentTheme, setTheme }) => html`
   <div class="toggle-theme">

@@ -5,6 +5,10 @@
   "manifest_version": 3,
   "permissions": ["tabs", "bookmarks", "fontSettings", "favicon"],
   "incognito": "split",
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
   "chrome_url_overrides": {
     "newtab": "index.html"
   },

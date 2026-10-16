@@ -15,7 +15,6 @@ const App = () => {
 
   const debouncedSearch = useDebounce(state.searchValue, 200);
   const getCurrentTheme = () => {
-    if (chrome.extension.inIncognitoContext) return 'incognito';
     return localStorage.getItem('current_theme') || 'default';
   };
 
@@ -88,23 +87,14 @@ const App = () => {
 
   const setFontEvent = (fontName) => {
     setFont(fontName);
-    if (!chrome.extension.inIncognitoContext) {
-      localStorage.setItem('current_font', fontName);
-    }
   };
 
   const setFontSizeEvent = (size) => {
     setFontSize(size);
-    if (!chrome.extension.inIncognitoContext) {
-      localStorage.setItem('current_font_size', size);
-    }
   };
 
   const toggleTheme = (theme) => {
     setTheme(theme);
-    if (!chrome.extension.inIncognitoContext) {
-      localStorage.setItem('current_theme', theme);
-    }
   };
 
   const setActiveFolder = (value) => {
@@ -205,28 +195,30 @@ const App = () => {
 
   return html`
     <div class="container" data-theme=${theme} style="font-size: ${fontSize}px; font-family: ${font};">
-      ${state.showSearch
-        ? html`
-            <input
-              ref=${searchSetFocus}
-              placeholder="Search"
-              class="search"
-              value=${state.searchValue}
-              onInput=${(event) =>
-                dispatch({
-                  type: actions.SET_SEARCH_VALUE,
-                  value: event.target.value,
-                })}
-            />
-          `
-        : html`
-            <${Folders}
-              setActiveFolder=${setActiveFolder}
-              folders=${state.folders}
-              activeFolder=${state.activeFolder}
-              getBookmarks=${getBookmarks}
-            />
-          `}
+      ${
+        state.showSearch
+          ? html`
+              <input
+                ref=${searchSetFocus}
+                placeholder="Search"
+                class="search"
+                value=${state.searchValue}
+                onInput=${(event) =>
+                  dispatch({
+                    type: actions.SET_SEARCH_VALUE,
+                    value: event.target.value,
+                  })}
+              />
+            `
+          : html`
+              <${Folders}
+                setActiveFolder=${setActiveFolder}
+                folders=${state.folders}
+                activeFolder=${state.activeFolder}
+                getBookmarks=${getBookmarks}
+              />
+            `
+      }
       <${Bookmarks} showGoUp=${state.showGoUp} goUp=${goUp} bookmarks=${state.bookmarks} getBookmarks=${getBookmarks} />
       <div class="tools">
         <button class="search-btn ${state.showSearch ? 'active' : ''}" onClick=${toggleSearch}>Search</button>
@@ -237,18 +229,20 @@ const App = () => {
           Settings
         </button>
       </div>
-      ${state.showSettings &&
-      html`
-        <div class="settings">
-          <${ToggleTheme} currentTheme=${theme} setTheme=${toggleTheme} />
-          <${FontSettings}
-            currentFontSize=${fontSize}
-            currentFont=${font}
-            setFont=${setFontEvent}
-            setSize=${setFontSizeEvent}
-          />
-        </div>
-      `}
+      ${
+        state.showSettings &&
+        html`
+          <div class="settings">
+            <${ToggleTheme} currentTheme=${theme} setTheme=${toggleTheme} />
+            <${FontSettings}
+              currentFontSize=${fontSize}
+              currentFont=${font}
+              setFont=${setFontEvent}
+              setSize=${setFontSizeEvent}
+            />
+          </div>
+        `
+      }
     </div>
   `;
 };
