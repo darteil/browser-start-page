@@ -1,8 +1,8 @@
-import { defineConfig } from "oxfmt";
+import { defineConfig } from 'oxfmt';
 
 export default defineConfig({
   semi: true,
-  trailingComma: "all",
+  trailingComma: 'all',
   singleQuote: true,
   printWidth: 120,
   tabWidth: 2,

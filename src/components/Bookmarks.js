@@ -11,14 +11,16 @@ const createFaviconURL = (url) => {
 const Bookmarks = ({ showGoUp, goUp, bookmarks, getBookmarks }) => html`
   <div class="bookmarks">
     <ul>
-      ${showGoUp &&
-      html`<li
-        onClick=${() => {
-          goUp();
-        }}
-      >
-        <a class="go-up">⮤ ...</a>
-      </li>`}
+      ${
+        showGoUp &&
+        html`<li
+          onClick=${() => {
+            goUp();
+          }}
+        >
+          <a class="go-up">⮤ ...</a>
+        </li>`
+      }
       ${bookmarks.map((node) => {
         if (node.type === 'bookmark') {
           return html`<li>
