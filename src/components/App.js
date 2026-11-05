@@ -87,14 +87,17 @@ const App = () => {
 
   const setFontEvent = (fontName) => {
     setFont(fontName);
+    localStorage.setItem('current_font', fontName);
   };
 
   const setFontSizeEvent = (size) => {
     setFontSize(size);
+    localStorage.setItem('current_font_size', size);
   };
 
   const toggleTheme = (theme) => {
     setTheme(theme);
+    localStorage.setItem('current_theme', theme);
   };
 
   const setActiveFolder = (value) => {
