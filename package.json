@@ -1,6 +1,6 @@
 {
   "name": "browser-start-page",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Start page extension for chromium based browsers",
   "keywords": [
     "chrome",
